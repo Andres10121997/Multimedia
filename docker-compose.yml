@@ -1,0 +1,61 @@
+services:
+    db:
+        image: mysql:latest
+        container_name: mysql_db
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: Multimedia
+        ports:
+            - "3306:3306"
+        volumes:
+            - db_data:/var/lib/mysql
+        command: [
+          '--character-set-server=utf8mb4',
+          '--collation-server=utf8mb4_unicode_ci'
+        ]
+    
+    api:
+        image: ${DOCKER_REGISTRY-}api
+        container_name: aspnet_api
+        depends_on:
+            - db
+        build:
+            context: .
+            dockerfile: API/Dockerfile
+        environment:
+            - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
+            - ASPNETCORE_HTTP_PORTS=8080
+            - ASPNETCORE_HTTPS_PORTS=8081
+        ports:
+            - "8080"
+            - "8081"
+        volumes:
+            - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+            - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+            - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+            - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+    web:
+        image: ${DOCKER_REGISTRY-}web
+        container_name: aspnet_web
+        depends_on:
+            - api
+        build:
+            context: .
+            dockerfile: Web/Dockerfile
+        environment:
+            - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
+            - ASPNETCORE_HTTP_PORTS=8080
+            - ASPNETCORE_HTTPS_PORTS=8081
+        ports:
+            - "8080"
+            - "8081"
+        volumes:
+            - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+            - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+            - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+            - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+
+volumes:
+    db_data:
