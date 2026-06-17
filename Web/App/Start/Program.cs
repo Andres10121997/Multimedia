@@ -1,4 +1,8 @@
-namespace Web
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
+namespace Web.App.Start
 {
     public class Program
     {
