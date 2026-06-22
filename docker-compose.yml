@@ -24,6 +24,7 @@ services:
             context: .
             dockerfile: API/Dockerfile
         environment:
+            # ASP NET CORE
             - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
             - ASPNETCORE_HTTP_PORTS=8080
             - ASPNETCORE_HTTPS_PORTS=8081
@@ -45,9 +46,12 @@ services:
             context: .
             dockerfile: Web/Dockerfile
         environment:
+            # ASP NET CORE
             - ASPNETCORE_ENVIRONMENT=${ENVIRONMENT}
             - ASPNETCORE_HTTP_PORTS=8080
             - ASPNETCORE_HTTPS_PORTS=8081
+            # Others
+            - WebsiteName=Multimedia
         ports:
             - "8080"
             - "8081"

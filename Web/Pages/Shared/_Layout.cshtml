@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <title>
-            @(ViewData["Title"] as string) - Web
+            @Environment.GetEnvironmentVariable(variable: "WebsiteName") | @(ViewData["Title"] as string)
         </title>
 
         <script type="importmap"></script>
