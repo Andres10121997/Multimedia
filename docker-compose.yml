@@ -2,7 +2,7 @@ services:
     db:
         image: mysql:latest
         container_name: mysql_db
-        restart: unless-stopped
+        restart: ${restart}
         environment:
             MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
             MYSQL_DATABASE: ${MYSQL_DATABASE}
@@ -20,6 +20,7 @@ services:
     api:
         image: ${DOCKER_REGISTRY-}api
         container_name: aspnet_api
+        restart: ${restart}
         depends_on:
             - db
         build:
@@ -42,6 +43,7 @@ services:
     web:
         image: ${DOCKER_REGISTRY-}web
         container_name: aspnet_web
+        restart: ${restart}
         depends_on:
             - api
         build:
