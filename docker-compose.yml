@@ -37,12 +37,14 @@ services:
             - "8080"
             - "8081"
         volumes:
-            - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
-            - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-            - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
-            - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
             # Configuración del almacenamiento persistente
             - '/path/to/host/uptime/:/app/data'
+            # Microsoft
+            - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+            - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+            # ASP NET
+            - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+            - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
     web:
         image: ${DOCKER_REGISTRY-}web
@@ -64,12 +66,14 @@ services:
             - "8080"
             - "8081"
         volumes:
-            - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
-            - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-            - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
-            - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
             # Configuración del almacenamiento persistente
             - '/path/to/host/uptime/:/app/data'
+            # Microsoft
+            - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+            - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+            # ASP NET
+            - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+            - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
 
 volumes:
     mysql_data:
