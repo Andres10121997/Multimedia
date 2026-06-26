@@ -6,4 +6,5 @@
   <Project Path="docker-compose.dcproj">
     <Build />
   </Project>
+  <Project Path="DTO/DTO.csproj" Id="bfe9a1ea-4b43-43a4-bbac-f480c1cc8017" />
 </Solution>
