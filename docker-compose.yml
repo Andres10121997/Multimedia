@@ -21,7 +21,7 @@ services:
     
     api:
         image: ${DOCKER_REGISTRY-}api
-        container_name: aspnet_api
+        container_name: multimedia_api
         restart: ${restart}
         depends_on:
             - db
@@ -48,7 +48,7 @@ services:
 
     web:
         image: ${DOCKER_REGISTRY-}web
-        container_name: aspnet_web
+        container_name: multimedia_web
         restart: ${restart}
         depends_on:
             - api
